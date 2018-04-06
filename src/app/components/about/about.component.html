@@ -1,0 +1,53 @@
+<h1>About</h1>
+
+<!-- * represent structural directive -->
+
+<label > Name </label>
+<!-- memberName is holding dom reference of input elem -->
+<!-- scope is limited only this component -->
+
+<input #memberName 
+       (focus)=" memberName.value='' "
+       (blur)="para1.textContent=memberName.value"
+/>
+
+<p #para1>
+
+</p>
+
+
+<div>
+  
+  <button (click)="empty()">
+    Empty
+  </button>
+
+  <button (click)="addMember(memberName.value)">
+     Add
+  </button>
+
+  <button (click)="show = !show">
+     {{ show? "Hide": "Show"}}
+  </button>
+
+  <div [ngClass]="{highlightColor : highlight}" 
+       (mouseenter)="highlight = true"
+       (mouseleave)="highlight = false"
+
+  >
+
+    <ul *ngIf="show else notShownMessage">
+      <li *ngFor="let name of members;let k=index;let isOdd=odd;">
+        {{k}}-{{name}}-{{isOdd}}
+      </li>
+    </ul>
+
+  </div>
+  <!-- ng 4, if else -->
+  <!-- ng feature # reference variable -->
+
+  <ng-template #notShownMessage>
+    <p>List is not shown</p>
+  </ng-template>
+
+</div>

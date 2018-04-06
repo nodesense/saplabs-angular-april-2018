@@ -1,0 +1,35 @@
+<div appHighlight color="lightgreen">
+ <h2>{{appTitle}}</h2> 
+
+ <a routerLink="/" class="button"  
+                    routerLinkActive="success"
+                    
+                    [routerLinkActiveOptions]="{exact: true}"
+                    
+                    >
+    Home
+</a>
+
+<a routerLink="/products"  class="button"  routerLinkActive="success"  >
+    Products
+</a>
+
+<a routerLink="/about"  class="button"  routerLinkActive="success"  >
+    About
+</a>
+
+<a routerLink="/contact"  class="button"  routerLinkActive="success" >
+    Contact
+</a>
+
+<a routerLink="/auth/login"  class="button"  routerLinkActive="success"  >
+    Login
+</a>
+
+<button (click)="logout()">
+    Logout
+</button>
+
+
+ <hr />
+</div>

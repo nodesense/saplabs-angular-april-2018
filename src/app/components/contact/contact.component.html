@@ -1,0 +1,37 @@
+<div>
+  <h2>Contact</h2>
+
+  <!-- input is a host element -->
+  <input #name  appHighlight />
+
+  <!-- null check elvis opeartor ?. -->
+  <p> Address {{address?.city}} </p>
+
+  <p> Contact likes {{contactLikes}} </p>
+
+  <app-like [(likes)]="contactLikes">
+  </app-like>
+
+  <p> Price {{price | currency}} </p>
+  <p> Price {{price | currency:'INR':true}} </p>
+
+  <p> Title {{title | uppercase }}</p>
+
+  <p> Title {{title | titlecase }}</p>
+
+  <p> Date {{today | date}} </p>
+
+  <p> Date {{today | date:'fullDate' | uppercase}} </p>
+
+
+  <p> Date {{today | date:'yyyy/dd/MMM'}} </p>
+
+  <pre> JSON {{address | json}} </pre>
+
+  <p> Power 2^3 => {{2 | power: 3}} </p>
+
+  <p> Power 5^1 => {{5| power}} </p>
+
+  <p> Power contactLikes^2 => {{contactLikes | power: 2}} </p>
+
+</div>

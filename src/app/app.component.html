@@ -1,0 +1,37 @@
+<div>
+    <!-- {{ interpolation, data binding with component variable -->
+        
+   
+
+    <app-header [appTitle]="appTitle">
+    </app-header>
+    
+
+    <!-- step 2: View container for routes -->
+    
+    <router-outlet>
+
+    </router-outlet>
+<!-- 
+    <app-home></app-home>
+    <app-about></app-about>
+    <app-contact></app-contact> -->
+
+
+    <!-- event binding child to parent
+         (contactEvent) => subscribe the event
+    -->
+   
+    <app-footer [startYear]="startYear"
+                [endYear]="endYear"
+                [address]="address"
+                (contactEvent)="onContactHandler($event)"
+    
+    >
+
+     <!-- content view/children -->
+     <!-- transfer from here to footer -->
+     <p> Contact time: 9:00 AM to 6:00 PM</p>
+
+    </app-footer>
+</div>

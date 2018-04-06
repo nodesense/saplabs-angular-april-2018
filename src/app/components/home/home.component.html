@@ -1,0 +1,60 @@
+<div>
+  <h1>Home</h1>
+
+  <p> Counter {{counter}} </p>
+
+
+  <p> Counter * 10 {{counter * 10}} </p>
+
+  <p> {{counter % 2 == 1?"Odd": "Even"}} number </p>
+
+
+  <!-- property binding [expr] -->
+
+  <input value="{{counter}}" />
+
+  <br />
+
+  <input [disabled]="counter % 2 == 0"
+        [value]="counter * 10" />
+
+
+  <!-- (eventName) for event binding -->
+<div (click)="parentClick()" >
+
+  <!-- $event represent event object -->
+  
+    <button (click)="increment($event)">
+      +1
+    </button>
+
+    <button (click)="step(2, $event)">
+        +2
+    </button>
+  </div>
+
+  <button (click)="counter = counter * 5">
+      * 5
+   </button>
+  
+
+   <br />
+
+   <!-- [()] two way binding -->
+
+   <input [(ngModel)]="name" />
+
+   <!-- option two, [()] converts below -->
+
+   <input [ngModel]="name"
+          (ngModelChange)="name = $event" />
+
+   <p>your name is {{name}} </p> 
+
+   <!-- from shared module -->
+   <p> Home Likes {{homeLikes}} </p>
+   <app-like [(likes)]="homeLikes" >
+
+   </app-like>
+
+</div>

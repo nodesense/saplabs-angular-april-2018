@@ -1,0 +1,35 @@
+<h2>Product List</h2>
+
+<button (click)="fetchProducts()">
+  Refresh
+</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Year</th>
+      <th>Weight</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let product of products;trackBy:trackByProductId">
+      <td>
+
+        {{product.name}}
+
+      </td>
+      <td> {{product.price}} </td>
+      <td> {{product.year}} </td>
+      <td> {{product.weight}} </td>
+      <td>
+          <button (click)="deleteProduct(product.id)">
+            Delete
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

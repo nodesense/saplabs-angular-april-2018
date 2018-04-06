@@ -1,0 +1,17 @@
+<!-- div is a host element -->
+<div appHighlight  color="lightblue">
+  <hr />
+
+  <p>Copyrights@ {{startYear}}-{{endYear.getFullYear()}}</p>
+
+  <p>Address {{address.city}} </p> 
+
+  <button (click)="contact()">
+    Contact
+  </button>
+
+  <!-- content part displayed here -->
+  <ng-content>
+  </ng-content>
+
+</div>
