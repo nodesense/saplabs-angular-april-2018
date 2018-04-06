@@ -23,8 +23,15 @@ Password
 
 <p> Valid: {{form.valid}}</p>
 
-<button [disabled]="form.invalid"
-
-(click)="login()">
+<button [disabled]="form.invalid" (click)="login()">
   Login
 </button>
+
+
+<p>Available username/password</p>
+
+<ul>
+  <li>admin/admin</li>
+  <li>staff/staff</li>
+  <li>user/user</li>
+</ul>
