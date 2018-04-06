@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { DataService } from './../../shared/services/data.service';
 import { Component, OnInit,
          Input,
 
@@ -26,8 +28,14 @@ export class FooterComponent implements OnInit {
   @Output()
   contactEvent: EventEmitter<any> = new EventEmitter();
 
+  counter$: Observable<number>;
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+
+    // to be bind in template
+    this.counter$ = this.dataService.counterSource;
+
+   }
 
   ngOnInit() {
   }

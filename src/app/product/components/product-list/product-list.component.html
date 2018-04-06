@@ -4,6 +4,40 @@
   Refresh
 </button>
 
+<select name="field"
+        [(ngModel)]="selectedField">
+
+    <option value="price">Price </option>
+    <option value="year">Year </option>
+
+</select>
+
+<select name="predicate"
+        [(ngModel)]="predicate">
+      <option value=">"> &gt; </option>
+      <option value="<"> &lt; </option>
+      <option value="="> == </option>
+</select>
+
+<p>Expected Value</p>
+<input name="expected"
+       type="number"
+       [(ngModel)]="expectedValue" />
+
+<p> Filter by {{selectedField}} {{predicate}} {{expectedValue}}</p>
+
+<p> Sort Field </p>
+<select name="sortField"
+        [(ngModel)]="sortField">
+
+    <option value="price">Price </option>
+    <option value="year">Year </option>
+
+</select>
+
+<p> Sort by {{sortField}}</p>
+
+
 <table>
   <thead>
     <tr>
@@ -16,10 +50,11 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let product of products;trackBy:trackByProductId">
+    <tr *ngFor="let product of ( (products$ | async) | filter:selectedField:predicate:expectedValue | sort:sortField:'asc');trackBy:trackByProductId">
       <td>
-
-        {{product.name}}
+        <a [routerLink]="['/products', 'edit', product.id]">
+          {{product.name}}
+        </a>
 
       </td>
       <td> {{product.price}} </td>

@@ -1,3 +1,4 @@
+import { DataService } from './../../shared/services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  counter: number = 1000;
+  counter: number;
+
 
   name: string = "angular";
 
@@ -16,9 +18,21 @@ export class HomeComponent implements OnInit {
   homeLikes: number = 100;
   
 
-  constructor() { }
+  constructor(private dataService: DataService) {
+
+    // pull 
+    // todo: to be improved
+    // this.counter = this.dataService.getCounter();
+
+   }
 
   ngOnInit() {
+    // .countersource.next(11) //publish
+    this.dataService.counterSource
+        .subscribe ( counter => {
+            console.log("HOME Subscribe ", counter);
+            this.counter = counter;
+        });
   }
 
   parentClick() {
@@ -26,14 +40,23 @@ export class HomeComponent implements OnInit {
   }
 
   increment(e: Event) {
-    this.counter++;
+    
+    // done in data service
+    // this.counter++;
+
+    this.dataService.increment();
+
     console.log("incr");
     // stop the event bubble up
     e.stopPropagation();
   }
 
   step(n: number, e: Event) {
-    this.counter += n;
+    //this.counter += n;
+    
+    this.dataService.increment();
+
+
     console.log("step");
   }
 

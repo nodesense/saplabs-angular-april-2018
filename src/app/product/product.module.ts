@@ -1,3 +1,5 @@
+import { SaveAlertGuard } from './guards/save-alert.guard';
+import { CanEditGuard } from './guards/can-edit.guard';
 import { ProductService } from './services/product.service';
  import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,11 +23,15 @@ const routes: Routes = [
       },
       {
         path: 'create',
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        canActivate: [CanEditGuard],
+        canDeactivate: [SaveAlertGuard]
       },
       {
         path: 'edit/:id', // products/edit/3456
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        canActivate: [CanEditGuard],
+        canDeactivate: [SaveAlertGuard]
       },
       {
         path: 'search',
@@ -37,12 +43,14 @@ const routes: Routes = [
 
 import {FormsModule, 
         ReactiveFormsModule} from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule, 
     ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -53,7 +61,9 @@ import {FormsModule,
 
   providers: [
      // all services, dependency injection goes here
-     ProductService
+     ProductService,
+     CanEditGuard, // entry guard
+     SaveAlertGuard // exit guard
   ]
 })
 export class ProductModule { }

@@ -1,6 +1,12 @@
 <!-- div is a host element -->
-<div appHighlight  color="lightblue">
+<div appHighlight  color="lightblue"  #myhighlight="appHighlight" >
   <hr />
+
+  <p> Color us {{myhighlight.color}} </p>
+
+  <!-- async pipe subscribe for rxjs, unsusbcribe on cleanup -->
+  
+  <p>Counter {{counter$ | async}} </p> 
 
   <p>Copyrights@ {{startYear}}-{{endYear.getFullYear()}}</p>
 

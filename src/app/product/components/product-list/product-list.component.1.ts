@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../../models/product';
@@ -11,14 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
 
-  products$: Observable<Product[]>;
+  products: Product[] = [];
 
-
-  selectedField: string;
-  predicate: string; // >,  <, =
-  expectedValue: any;
-
-  sortField: string;
+  subscription: Subscription;
 
   // Angular creates PRoductService object if already not created
   // inject into productlist component
@@ -28,21 +22,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 
   fetchProducts() {
-     this.products$ = this.productService.getProducts();
+     this.subscription =  this.productService.getProducts()
+          .subscribe ( products => {
+            this.products = products;
+            console.log("got products ", products);
+          });
   }
 
   // called by ngFor
   trackByProductId(index: number, product: Product): number {
-    //console.log("track ", index, product.id);
+    console.log("track ", index, product.id);
     return product.id;
-  }
-
-  deleteProduct(id: any) {
-    this.productService.deleteProduct(id)
-        .subscribe ( () => {
-            // refresh after delete
-            this.fetchProducts();
-        });
   }
 
 
@@ -50,9 +40,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.fetchProducts();
   }
 
+  // called by angular, before deleting component
   ngOnDestroy() {
-    
+    console.log("product list destroy ");
+    // abort the socket connection
+    this.subscription.unsubscribe();
   }
- 
 
 }

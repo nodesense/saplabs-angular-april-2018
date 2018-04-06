@@ -1,3 +1,4 @@
+import { DataService } from './services/data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LikeComponent } from './components/like/like.component';
@@ -28,6 +29,10 @@ import { SortPipe } from './pipes/sort.pipe';
     HighlightDirective,
     FilterPipe,
     SortPipe
+ ],
+
+ providers: [
+   DataService
  ]
 })
 export class SharedModule { }

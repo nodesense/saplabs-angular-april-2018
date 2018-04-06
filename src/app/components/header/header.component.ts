@@ -1,3 +1,4 @@
+import { DataService } from './../../shared/services/data.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  counter: number;
+
   // Parent to child communication (Input)
   // Property binding
   
@@ -14,9 +17,14 @@ export class HeaderComponent implements OnInit {
   appTitle: string;
 
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.counterSource
+        .subscribe ( counter => {
+          this.counter = counter;
+          console.log("HEADER Sub");
+        });
   }
 
 }

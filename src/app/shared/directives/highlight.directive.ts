@@ -8,6 +8,7 @@ import { Directive,
 
 @Directive({
   selector: '[appHighlight]', // MUST []
+  exportAs: 'appHighlight' // helps to get directive object using #
 })
 export class HighlightDirective implements OnInit {
 

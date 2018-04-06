@@ -1,3 +1,4 @@
+import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 // logical collection of component, directive, pipes, services
 
@@ -55,6 +56,8 @@ const routes: Routes = [
 
             // TODO: lazy load
             ProductModule,
+
+            AuthModule
 
             //3rd party module like Bootstrap,
             // InventoryModule
