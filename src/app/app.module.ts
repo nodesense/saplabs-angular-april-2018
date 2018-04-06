@@ -1,5 +1,5 @@
 import { AuthModule } from './auth/auth.module';
-import { ProductModule } from './product/product.module';
+//import { ProductModule } from './product/product.module';
 // logical collection of component, directive, pipes, services
 
 import {NgModule} from '@angular/core';
@@ -23,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 // Step 1: Route configuration
 import {RouterModule, Routes} from '@angular/router';
+import { AuthGuard } from './auth/guards/auth.guard';
 const routes: Routes = [
     {
         path: '', // home page
@@ -36,6 +37,13 @@ const routes: Routes = [
         path: 'contact',
         component: ContactComponent
     },
+
+    {
+        path: 'products',
+        loadChildren: 'app/product/product.module#ProductModule',
+        canActivate: [AuthGuard]
+    },
+
     {
         path: '**',
         component: NotFoundComponent
@@ -55,7 +63,7 @@ const routes: Routes = [
             SharedModule,
 
             // TODO: lazy load
-            ProductModule,
+       //     ProductModule,
 
             AuthModule
 

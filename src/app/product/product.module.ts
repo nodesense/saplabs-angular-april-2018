@@ -12,7 +12,8 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'products',
+    // path: 'products',
+    path: '', // for lazy loading, since products comes from app module
     component: ProductHomeComponent,
 
     // nested navigation
