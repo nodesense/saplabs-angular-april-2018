@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         .login(this.username, this.password)
         .subscribe ( data => {
             //go to home page after login
-            this.router.navigateByUrl("/");
+            this.router.navigateByUrl(this.authService.redirectUrl || "/");
         },
 
         (errorResponse: HttpResponse<any>) => {

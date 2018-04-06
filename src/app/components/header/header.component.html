@@ -23,13 +23,20 @@
     Contact
 </a>
 
-<a routerLink="/auth/login"  class="button"  routerLinkActive="success"  >
+<a  routerLink="/auth/login"  
+    class="button"  routerLinkActive="success" 
+    *ngIf="!(authStatus$ | async) else logoutPart"
+    >
     Login
 </a>
 
-<button (click)="logout()">
-    Logout
-</button>
+<ng-template #logoutPart>
+
+    <button (click)="logout()" >
+        Logout
+    </button>
+</ng-template>
+
 
 <span>Counter {{counter}}</span>
 

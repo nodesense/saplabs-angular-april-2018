@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,6 +9,7 @@ import "rxjs/Rx";
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
+ 
 @Injectable()
 export class AuthService {
 
@@ -17,7 +19,13 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { 
 
+    this.authStatus =   new BehaviorSubject(this.isAuthenticated());
   }
+
+  public redirectUrl:string;
+  authStatus: BehaviorSubject<boolean>;
+
+
 
   isAuthenticated() {
     let token = this.storage.getItem('token');
@@ -44,6 +52,7 @@ export class AuthService {
                  //data has token, roles
                  console.log(data);
                  this.storage.setItem("token", data.token);
+                 this.authStatus.next(true);
                  return data;
                });
     
@@ -51,5 +60,6 @@ export class AuthService {
 
   logout() {
     this.storage.clear();
+    this.authStatus.next(false);
   }
 }
