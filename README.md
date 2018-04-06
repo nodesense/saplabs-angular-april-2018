@@ -1,16 +1,25 @@
 # Check out
     > git clone https://github.com/nodesense/saplabs-angular-april-2018
+
    > cd saplabs-angular-april-2018
+
    > npm install
+
    > ng serve
 
 ng serve with aot
     > ng serve --aot
 
 production build
-    >ng build --prod
+
+    > ng build --prod
 
 Production bundles are kept in /dist directory.
+
+Run test cases
+
+    > ng test
+
 
 # RESTful service
   
