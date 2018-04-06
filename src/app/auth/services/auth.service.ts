@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +14,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
+  user: User = new User();
+
   storage: Storage = window.localStorage;
 
   //FIXME: interceptors, cyclic dependencies
@@ -24,7 +27,6 @@ export class AuthService {
 
   public redirectUrl:string;
   authStatus: BehaviorSubject<boolean>;
-
 
 
   isAuthenticated() {
@@ -40,6 +42,11 @@ export class AuthService {
     return this.storage.getItem('token');
   }
 
+  hasRole(role: string) {
+    // includes from ES7
+    return this.user.roles.includes(role);
+  }
+
   login(username: string, password: string):Observable<any> {
     let data = {
       username: username,
@@ -50,7 +57,9 @@ export class AuthService {
                .post(environment.authEndPoint, data)
                .map ( (data: any) => {
                  //data has token, roles
-                 console.log(data);
+                 console.log("DAta ", data);
+                 this.user = data.identity;
+                 console.log("User", this.user);
                  this.storage.setItem("token", data.token);
                  this.authStatus.next(true);
                  return data;
@@ -61,5 +70,6 @@ export class AuthService {
   logout() {
     this.storage.clear();
     this.authStatus.next(false);
+    this.user = new User();
   }
 }

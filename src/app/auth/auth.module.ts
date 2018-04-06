@@ -17,6 +17,9 @@ import { IntercepterService } from './services/intercepter.service';
 
 import {Routes, RouterModule} 
       from '@angular/router';
+import { AuthMenuComponent } from './components/auth-menu/auth-menu.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { UsersComponent } from './components/users/users.component';
   
 const routes: Routes = [
   {
@@ -24,8 +27,18 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'forbidden',
+    path: 'auth/profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'auth/forbidden',
     component: ForbiddenComponent
+  },
+  {
+    path: 'admin/users',
+    component: UsersComponent,
+    canActivate: [AuthGuard, AdminGuard]
   }
 ];
 
@@ -39,7 +52,14 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [LoginComponent, 
-                 ForbiddenComponent],
+                 ForbiddenComponent, 
+                 AuthMenuComponent, 
+                 ProfileComponent, 
+                 UsersComponent],
+
+  exports: [
+    AuthMenuComponent
+  ],
 
   providers: [
     AuthGuard,

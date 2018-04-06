@@ -1,3 +1,4 @@
+import { AdminGuard } from './auth/guards/admin.guard';
 import { AuthModule } from './auth/auth.module';
 //import { ProductModule } from './product/product.module';
 // logical collection of component, directive, pipes, services
